@@ -243,7 +243,8 @@ module RightAws
         :client_token            => { :value => !@params[:eucalyptus] && (options[:client_token] || AwsUtils::generate_unique_token)},
         :user_data               => { :value => Proc.new { !options[:user_data].empty? && Base64.encode64(options[:user_data]).delete("\n") }},
         :monitoring_enabled      => { :name  => 'Monitoring.Enabled',
-                                      :value => Proc.new{ options[:monitoring_enabled] && options[:monitoring_enabled].to_s }})
+                                      :value => Proc.new{ options[:monitoring_enabled] && options[:monitoring_enabled].to_s }},
+        :iam_instance_profile_name => 'IamInstanceProfile.Name')
       # Log debug information
       @logger.info("Launching instance of image #{image_id}. Options: #{params.inspect}")
       # Add IOPS support (default behavior) but skip it when an old API version call is requested
